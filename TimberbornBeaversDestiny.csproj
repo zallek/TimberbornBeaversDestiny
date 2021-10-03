@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Timberborn.BeaversDestiny</AssemblyName>
+    <Description>Beaver destiny for Timberborn</Description>
+    <Version>0.0.1</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Timberborn.GameUI">
+      <HintPath>../libs/Timberborn.GameUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.MapIndexSystem">
+      <HintPath>../libs/Timberborn.MapIndexSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.SoilMoistureSystem">
+      <HintPath>../libs/Timberborn.SoilMoistureSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>../libs/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>../libs/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>../libs/UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir $(ProjectDir)\dist\BeaversDestiny&#xD;&#xA;del $(ProjectDir)\dist\BeaversDestiny /q&#xD;&#xA;copy $(TargetPath) $(ProjectDir)\dist\BeaversDestiny\&#xD;&#xA;copy $(ProjectDir)thunderstore\* $(ProjectDir)\dist\BeaversDestiny&#xD;&#xA;copy $(ProjectDir)README.md $(ProjectDir)\dist\BeaversDestiny&#xD;&#xA;del $(ProjectDir)\dist\BeaversDestiny.zip&#xD;&#xA;powershell Compress-Archive $(ProjectDir)\dist\BeaversDestiny\* $(ProjectDir)\dist\BeaversDestiny.zip"/>
+  </Target>
+</Project>
