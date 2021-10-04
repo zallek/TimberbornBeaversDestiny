@@ -1,33 +1,68 @@
 using Timberborn.MapIndexSystem;
+using Timberborn.SingletonSystem;
 using Timberborn.SoilMoistureSystem;
 using System.Linq;
 
 namespace BeaversDestiny
 {
-    struct MoistureGoal
+    public struct Goal
     {
-        public int moisturedSize;
-        public int mapSize;
+        public int current;
+        public int target;
     }
 
-    class GoalService
+    public interface IGoalService
+    {
+        string GoalLabel { get; }
+        Goal GetGoal();
+    }
+
+    class PopulationGoalService : ILoadableSingleton, IGoalService
+    {
+        public string GoalLabel => "Population";
+        public void Load() { }
+        public Goal GetGoal()
+        {
+            return new Goal
+            {
+                current = 0,
+                target = 100,
+            };
+        }
+    }
+
+    class IrrigationGoalService : ILoadableSingleton, IGoalService
     {
         private MapIndexService _mapIndexService;
         private ISoilMoistureService _soilMoistureService;
-
-        public MoistureGoal GetMoistureGoal()
+        public string GoalLabel => "Irrigate the world";
+        public IrrigationGoalService(MapIndexService mapIndexService, ISoilMoistureService soilMoistureService)
         {
-            return new MoistureGoal
+            _mapIndexService = mapIndexService;
+            _soilMoistureService = soilMoistureService;
+        }
+        public void Load() { }
+        public Goal GetGoal()
+        {
+            return new Goal
             {
-                moisturedSize = Enumerable.Range(0, _mapIndexService.TotalMapSize).Count(index => _soilMoistureService.SoilMoisture(index) > 0),
-                mapSize = _mapIndexService.TotalMapSize,
+                current = Enumerable.Range(0, _mapIndexService.TotalMapSize).Count(index => _soilMoistureService.SoilMoisture(index) > 0),
+                target = _mapIndexService.TotalMapSize,
             };
         }
+    }
 
-        public float GetMoistureGoalPct()
+    class PowerTributeGoalService : ILoadableSingleton, IGoalService
+    {
+        public string GoalLabel => "Power the tribute to Ingenuity";
+        public void Load() { }
+        public Goal GetGoal()
         {
-            MoistureGoal moistureGoal = GetMoistureGoal();
-            return moistureGoal.moisturedSize / moistureGoal.mapSize;
+            return new Goal
+            {
+                current = 0,
+                target = 100,
+            };
         }
     }
 }

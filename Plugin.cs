@@ -3,7 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System.Reflection;
 
-namespace ToolShortcuts
+namespace BeaversDestiny
 {
     [BepInPlugin("Timberborn.BeaversDestiny", "BeaverDestiny", "0.0.1")]
     public class Plugin : BaseUnityPlugin
