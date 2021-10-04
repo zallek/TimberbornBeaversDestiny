@@ -19,6 +19,12 @@
     <Reference Include="Bindito.Core">
       <HintPath>../libs/Bindito.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Timberborn.FactionSystem">
+      <HintPath>../libs/Timberborn.FactionSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.FactionSystemGame">
+      <HintPath>../libs/Timberborn.FactionSystemGame.dll</HintPath>
+    </Reference>
     <Reference Include="Timberborn.GameUI">
       <HintPath>../libs/Timberborn.GameUI.dll</HintPath>
     </Reference>
@@ -28,14 +34,14 @@
     <Reference Include="Timberborn.MasterScene">
       <HintPath>../libs/Timberborn.MasterScene.dll</HintPath>
     </Reference>
+    <Reference Include="Timberborn.Population">
+      <HintPath>../libs/Timberborn.Population.dll</HintPath>
+    </Reference>
     <Reference Include="Timberborn.SoilMoistureSystem">
       <HintPath>../libs/Timberborn.SoilMoistureSystem.dll</HintPath>
     </Reference>
     <Reference Include="Timberborn.SingletonSystem">
       <HintPath>../libs/Timberborn.SingletonSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Timberborn.ToolSystem">
-      <HintPath>../libs/Timberborn.ToolSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>../libs/UnityEngine.dll</HintPath>

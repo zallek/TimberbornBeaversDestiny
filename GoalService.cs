@@ -1,4 +1,5 @@
 using Timberborn.MapIndexSystem;
+using Timberborn.Population;
 using Timberborn.SingletonSystem;
 using Timberborn.SoilMoistureSystem;
 using System.Linq;
@@ -19,13 +20,20 @@ namespace BeaversDestiny
 
     class PopulationGoalService : ILoadableSingleton, IGoalService
     {
+        private PopulationService _populationService;
+
+        public PopulationGoalService(PopulationService populationService)
+        {
+            _populationService = populationService;
+        }
+
         public string GoalLabel => "Population";
         public void Load() { }
         public Goal GetGoal()
         {
             return new Goal
             {
-                current = 0,
+                current = _populationService.GlobalPopulationData.NumberOfBeavers,
                 target = 100,
             };
         }
